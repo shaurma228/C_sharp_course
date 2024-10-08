@@ -12,7 +12,7 @@ namespace lab1
         {
             Program p = new Program();
             string input;
-            Console.Write("choose task or 0 to exit: ");
+            Console.Write("choose task: ");
             string task = Console.ReadLine();
             switch (task) {
                 case "11":
@@ -512,9 +512,6 @@ namespace lab1
                         Console.Write(i + " ");
                     }
                     Console.WriteLine();
-                    return;
-
-                case "0":
                     return;
                 default:
                     Console.WriteLine("no task");
