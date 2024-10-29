@@ -17,7 +17,7 @@ namespace lab2_task1
             this.size = c;
         }
 
-        public int MaxLastAboba()
+        public int MaxLastNum()
         {
             int last_a = Math.Abs(resH) % 10;
             int last_b = Math.Abs(resV) % 10;
