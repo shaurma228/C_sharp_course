@@ -130,7 +130,7 @@ namespace lab2_task1
                     Console.WriteLine($"    [{i}] " + displays[i].ToString());
                 }
 
-                Console.Write("\n1 - add screen, 2 - add display, 3 - display resolution, 4 - display PPI, 0 - exit: ");
+                Console.Write("\n1 - add screen, 2 - add display, 3 - display resolution, 4 - display PPI, 5 - max last num in screen, 0 - exit: ");
                 e = p.Input();
 
                 switch (e)
@@ -185,6 +185,17 @@ namespace lab2_task1
                             break;
                         }
                         Console.WriteLine($"    Display [{n}] PPI is " + displays[n].PPI());
+                        break;
+                    case 5:
+                        Console.Write("    Screen number: ");
+                        n = p.Input();
+
+                        if (n < 0 || n >= screens.Length)
+                        {
+                            Console.WriteLine("    This screen doesn't exist");
+                            break;
+                        }
+                        Console.WriteLine($"    Screen [{n}] max last num is " + screens[n].MaxLastNum());
                         break;
                 }
             }
