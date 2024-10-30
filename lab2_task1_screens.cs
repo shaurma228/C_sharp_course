@@ -1,41 +1,48 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-class Screen
+namespace lab2_task1
 {
-    protected int resH, resV, size; //resolution horisontal, resolution vertical, size (inch)
-
-    public Screen(int a, int b, int c)
+    class Screen
     {
-        this.resH = a;
-        this.resV = b;
-        this.size = c;
-    }
+        protected int resH, resV, size; //resolution horisontal, resolution vertical, size (inch)
 
-    public int MaxLastNum()
-    {
-        int last_a = Math.Abs(resH) % 10;
-        int last_b = Math.Abs(resV) % 10;
-        int last_c = Math.Abs(size) % 10;
-        return Math.Max(last_a, Math.Max(last_b, last_c));
-    }
+        public Screen(int a, int b, int c)
+        {
+            this.resH = a;
+            this.resV = b;
+            this.size = c;
+        }
 
-    public override string ToString()
-    {
-        return $"Resolution: {resH}x{resV}, Size: {size} inch";
-    }
+        public int MaxLastNum()
+        {
+            int last_a = Math.Abs(resH) % 10;
+            int last_b = Math.Abs(resV) % 10;
+            int last_c = Math.Abs(size) % 10;
+            return Math.Max(last_a, Math.Max(last_b, last_c));
+        }
 
-    public int A
-    {
-        get { return resH; }
-    }
+        public override string ToString()
+        {
+            return $"Resolution: {resH}x{resV}, Size: {size} inch";
+        }
 
-    public int B
-    {
-        get { return resV; }
-    }
+        public int A
+        {
+            get { return resH; }
+        }
 
-    public int C
-    {
-        get { return size; }
+        public int B
+        {
+            get { return resV; }
+        }
+
+        public int C
+        {
+            get { return size; }
+        }
     }
 }
