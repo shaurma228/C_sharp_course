@@ -48,7 +48,7 @@ namespace lab2_task1
 
     class Display : Screen
     {
-        string  type; //display type (OLED, IPS etc.)
+        string type; //display type (OLED, IPS etc.)
         int refR; //refresh rate
 
         public Display(int resH, int resV, int size, string type, int refR) : base(resH, resV, size)
@@ -67,23 +67,17 @@ namespace lab2_task1
             get { return refR; }
         }
 
-        public string Resolution()
+        public string Ratio()
         {
-            switch (resV)
+            int a = resV, b = resH;
+            int temp;
+            while (b != 0)
             {
-                case 720:
-                    return "HD";
-                case 1080:
-                    return "FHD";
-                case 1440:
-                    return "QHD";
-                case 2160:
-                    return "4K";
-                case 4320:
-                    return "8K";
-                default:
-                    return Convert.ToString(resV) + 'p';
+                temp = b;
+                b = a % b;
+                a = temp;
             }
+            return $"{resH/a}:{resV/a}";
         }
 
         public double PPI()
@@ -130,7 +124,7 @@ namespace lab2_task1
                     Console.WriteLine($"    [{i}] " + displays[i].ToString());
                 }
 
-                Console.Write("\n1 - add screen, 2 - add display, 3 - display resolution, 4 - display PPI, 5 - max last num in screen, 0 - exit: ");
+                Console.Write("\n1 - add screen, 2 - add display, 3 - display ratio, 4 - display PPI, 5 - max last num in screen, 0 - exit: ");
                 e = p.Input(false);
 
                 switch (e)
@@ -155,7 +149,7 @@ namespace lab2_task1
                         Console.Write("    Size: ");
                         size = p.Input(true);
                         Console.Write("    Type: ");
-                        type = Console.ReadLine();
+                        type = p.InputScreen();
                         Console.Write("    Refresh rate: ");
                         refR = p.Input(true);
 
@@ -172,7 +166,7 @@ namespace lab2_task1
                             Console.WriteLine("    This display doesn't exist");
                             break;
                         }
-                        Console.WriteLine($"    Display [{n}] resolution is " + displays[n].Resolution());
+                        Console.WriteLine($"    Display [{n}] ratio is " + displays[n].Ratio());
                         break;
 
                     case 4:
@@ -222,6 +216,18 @@ namespace lab2_task1
                 }
             }
             return i;
+        }
+
+        public string InputScreen()
+        {
+            string[] types = new string[4] {"IPS", "TN", "VA", "OLED" };
+            string line = Console.ReadLine();
+            while (!types.Contains(line))
+            {
+                Console.Write("    Screen type must be IPS, TN, VA or OLED: ");
+                line = Console.ReadLine();
+            }
+            return line;
         }
     }
 }
