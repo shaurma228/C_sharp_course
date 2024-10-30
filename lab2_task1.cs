@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -131,17 +131,17 @@ namespace lab2_task1
                 }
 
                 Console.Write("\n1 - add screen, 2 - add display, 3 - display resolution, 4 - display PPI, 5 - max last num in screen, 0 - exit: ");
-                e = p.Input();
+                e = p.Input(false);
 
                 switch (e)
                 {
                     case 1:
                         Console.Write("    Horisontal resolution: ");
-                        resH = p.Input();
+                        resH = p.Input(true);
                         Console.Write("    Vertical resolution: ");
-                        resV = p.Input();
+                        resV = p.Input(true);
                         Console.Write("    Size: ");
-                        size = p.Input();
+                        size = p.Input(true);
 
                         Array.Resize<Screen>(ref screens, screens.Length + 1);
                         screens[screens.Length - 1] = new Screen(resH, resV, size);
@@ -149,15 +149,15 @@ namespace lab2_task1
 
                     case 2:
                         Console.Write("    Horisontal resolution: ");
-                        resH = p.Input();
+                        resH = p.Input(true);
                         Console.Write("    Vertical resolution: ");
-                        resV = p.Input();
+                        resV = p.Input(true);
                         Console.Write("    Size: ");
-                        size = p.Input();
+                        size = p.Input(true);
                         Console.Write("    Type: ");
                         type = Console.ReadLine();
                         Console.Write("    Refresh rate: ");
-                        refR = p.Input();
+                        refR = p.Input(true);
 
                         Array.Resize<Display>(ref displays, displays.Length + 1);
                         displays[displays.Length - 1] = new Display(resH, resV, size, type, refR);
@@ -165,7 +165,7 @@ namespace lab2_task1
 
                     case 3:
                         Console.Write("    Display number: ");
-                        n = p.Input();
+                        n = p.Input(false);
 
                         if (n < 0 || n >= displays.Length)
                         {
@@ -177,7 +177,7 @@ namespace lab2_task1
 
                     case 4:
                         Console.Write("    Display number: ");
-                        n = p.Input();
+                        n = p.Input(false);
 
                         if (n < 0 || n >= displays.Length)
                         {
@@ -188,7 +188,7 @@ namespace lab2_task1
                         break;
                     case 5:
                         Console.Write("    Screen number: ");
-                        n = p.Input();
+                        n = p.Input(false);
 
                         if (n < 0 || n >= screens.Length)
                         {
@@ -201,13 +201,25 @@ namespace lab2_task1
             }
         }
 
-        public int Input(int i = 0)
+        public int Input(bool ispos)
         {
+            int i = 0;
             string line = Console.ReadLine();
-            while(!int.TryParse(line, out i))
+            if (!ispos)
             {
-                Console.Write("    Value must be digit: ");
-                line = Console.ReadLine();
+                while(!int.TryParse(line, out i))
+                {
+                    Console.Write("    Value must be digit: ");
+                    line = Console.ReadLine();
+                }
+            }
+            else
+            {
+                while (!int.TryParse(line, out i) || i <= 0)
+                {
+                    Console.Write("    Value must be digit and more than zero: ");
+                    line = Console.ReadLine();
+                }
             }
             return i;
         }
